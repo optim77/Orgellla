@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
+use App\Product;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +16,10 @@ class Main extends Controller
     }
 
     public function index(){
-        return view('main.base');
+        $categories = Category::all();
+
+        $products = Product::all();
+        return view('main.base',compact('products','categories'));
     }
 
     public function profile(){

@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('zip')->nullable();
             $table->string('phone')->nullable();
             $table->boolean('admin')->nullable();
+            $table->boolean('blocked')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

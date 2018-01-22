@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 class Add extends Controller
 {
-    
+    public function create(){
+
+    }
 
 }

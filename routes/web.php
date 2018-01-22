@@ -14,6 +14,7 @@
 Route::get('/','Main@index');
 Route::group(['middleware' => ['web']], function(){
     Route::get('/profile','Main@profile')->name('profile');
+    Route::get('/create','Add@create')->name('createProduct');
     Route::resource('app','Main');
     Auth::routes();
 
