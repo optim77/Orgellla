@@ -11,7 +11,7 @@ class Product extends Model
     }
 
     public function bought(){
-        $this->belongsToMany('App\Bought');
+       return $this->hasMany('App\Bought');
     }
 
     public function user(){

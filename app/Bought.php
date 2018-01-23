@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Bought extends Model
 {
     public function product(){
-        $this->hasMany('App\Product');
+       return $this->belongsTo('App\Product');
     }
 
     public function user(){
-        $this->hasMany('App\User');
+       return $this->belongsTo('App\User');
     }
 }

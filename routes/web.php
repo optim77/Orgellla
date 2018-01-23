@@ -13,7 +13,18 @@
 
 Route::get('/','Main@index');
 Route::group(['middleware' => ['web']], function(){
-    Route::get('/profile','Main@profile')->name('profile');
+    /** Show profile */
+    Route::get('/profile','Profile@show')->name('profile');
+
+    Route::get('/profile/edit','Profile@edit')->name('editProfile');
+
+    /** Edit profile datas */
+    Route::post('/profile/edit/action','Profile@editAction')->name('editProfileAction');
+
+    /** Show bought card */
+    Route::get('/profile/kupione','Profile@bought')->name('boughtProfile');
+
+
     Route::get('/create','Add@create')->name('createProduct');
     Route::resource('app','Main');
     Auth::routes();

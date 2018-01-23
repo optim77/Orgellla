@@ -22,10 +22,4 @@ class Main extends Controller
         return view('main.base',compact('products','categories'));
     }
 
-    public function profile(){
-        $id = Auth::id();
-        $data = User::find($id);
-
-        return view('main.profile')->with('data',$data);
-    }
 }
