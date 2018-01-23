@@ -21,11 +21,13 @@
     <div class="container-fluid px-5 mt-5 jumbotron jumbotron-fluid">
         <div class="row ">
             @foreach($products as $product)
-
                 <div class="col-md-2 col-sm-2">
-                    <img class="w-100" src="{{$product['photo1']}}">
-                    <p class="pt-1">{{$product['name']}}</p>
-                    <p class="h4">price</p>
+                    <a class="text-dark" href="{{route('showSlug',$product->slug)}}">
+                        <img class="w-100" src="upload/photos/{{$product->photo1}}">
+                        <p class="pt-1">{{$product['name']}}</p>
+                        <p class="h4">{{$product->price}} PLN</p>
+                    </a>
+
                 </div>
 
                 @endforeach

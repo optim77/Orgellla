@@ -29,11 +29,11 @@ Route::group(['middleware' => ['web']], function(){
 
     Route::post('/create/action','Profile@createAction')->name('createAction');
 
-
     //Route::get('/create','Add@create')->name('createProduct');
     Route::resource('app','Main');
     Auth::routes();
 
+    Route::get('/show/{slug}','Product@show')->name('showSlug');
 
 });
 

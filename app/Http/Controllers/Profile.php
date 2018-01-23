@@ -61,9 +61,10 @@ class Profile extends Controller
 
         if(Input::hasFile('photo1') && $request->file('photo1')->getClientSize() < 500000){
 
-            $md5Name = md5_file($request->file('photo1')->getRealPath());
+            $name = uniqid(null,true);
             $guessExtension = $request->file('photo1')->guessExtension();
-            $file = $request->file('photo1')->move('upload/photos', $md5Name.'.'.$guessExtension);
+            $product->photo1 = $name.'.'.$guessExtension;
+            $file = $request->file('photo1')->move('upload/photos', $name.'.'.$guessExtension);
         }
         $product->save();
         return redirect('profile');
