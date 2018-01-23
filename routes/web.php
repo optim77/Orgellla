@@ -24,8 +24,13 @@ Route::group(['middleware' => ['web']], function(){
     /** Show bought card */
     Route::get('/profile/kupione','Profile@bought')->name('boughtProfile');
 
+    /** Show create product form */
+    Route::get('/create','Profile@create')->name('create');
 
-    Route::get('/create','Add@create')->name('createProduct');
+    Route::post('/create/action','Profile@createAction')->name('createAction');
+
+
+    //Route::get('/create','Add@create')->name('createProduct');
     Route::resource('app','Main');
     Auth::routes();
 
