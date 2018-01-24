@@ -21,7 +21,7 @@
                     <p class="display-4">{{$p->name}}</p>
                     <p class="display-4">Pozostało: {{$p->amount}}</p>
                     <p class="display-4">{{$p->price}} PLN</p>
-                    <button class="btn-lg btn btn-danger mt-2">Dodaj do koszyka</button><br>
+                    <button id="addToBasket" onclick="addToBasket({{$p->id}})" class="btn-lg btn btn-danger mt-2">Dodaj do koszyka</button><br>
                     <button class="btn-lg btn btn-info mt-2">Przejdź do płatności</button>
                 </div>
 
@@ -94,7 +94,6 @@
                         </div>
                     </div>
                     @endif
-
             </div>
         @endforeach
     </div>
@@ -102,5 +101,28 @@
     <div class="footer mt-3 bg-dark p-3">
 
     </div>
+
+    <script>
+
+        function addToBasket(a) {
+
+            $.ajax({
+                url: "{{route('addToBasket')}}",
+                method: "POST",
+                datatype: "json",
+                data: a,
+                success: function () {
+                    alert(1);
+                }
+            });
+
+            {{--$.post('{{route('addToBasket')}}',{val: a},function (response) {--}}
+                {{--if(response){--}}
+
+                {{--}--}}
+            {{--})--}}
+        }
+
+    </script>
 
     @stop

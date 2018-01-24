@@ -27,13 +27,19 @@ Route::group(['middleware' => ['web']], function(){
     /** Show create product form */
     Route::get('/create','Profile@create')->name('create');
 
+    /** Create new product page*/
     Route::post('/create/action','Profile@createAction')->name('createAction');
 
     //Route::get('/create','Add@create')->name('createProduct');
     Route::resource('app','Main');
     Auth::routes();
 
-    Route::get('/show/{slug}','Product@show')->name('showSlug');
+    /**Show once product page*/
+    Route::get('/show/{slug}','Product@show')->name('showSlug')->where('slug','[.a-zA-Z0-9]+');
 
+    /**Show category page*/
+    Route::get('category/{$category}','Category@show')->name('showCategory');
+
+    Route::match(['post','get'],'/addToBasket','Ajax@addToBasket')->name('addToBasket');
 });
 
