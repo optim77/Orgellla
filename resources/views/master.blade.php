@@ -32,10 +32,12 @@
         <div class="col-md-4 mt-4">
             @if(Auth::check())
                 <a class="text-dark" href="{{route('profile')}}"><i class="far fa-user h2 ml-5"></i></a>
+                <a class="text-dark" href="{{route('basketShow')}}" ><i class="fas fa-shopping-basket h2 ml-5"></i></a>
                 @else
                 <a class="text-dark" href="{{route('login')}}"><i class="far fa-user h2 ml-5"></i></a>
+                <a class="text-dark" href="{{route('login')}}" ><i class="fas fa-shopping-basket h2 ml-5"></i></a>
             @endif
-            <i class="fas fa-shopping-basket h2 ml-5"></i>
+
         </div>
     </div>
 </div>

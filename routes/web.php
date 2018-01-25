@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/','Main@index');
+Route::get('/','Main@index')->name('mainIndex');
 Route::group(['middleware' => ['web']], function(){
     /** Show profile */
     Route::get('/profile','Profile@show')->name('profile');
@@ -39,6 +39,8 @@ Route::group(['middleware' => ['web']], function(){
 
     /**Show category page*/
     Route::get('category/{$category}','Category@show')->name('showCategory');
+
+    Route::get('/koszyk','Basket@show')->name('basketShow');
 
     Route::match(['post','get'],'/addToBasket','Ajax@addToBasket')->name('addToBasket');
 });

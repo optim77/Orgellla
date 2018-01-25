@@ -21,6 +21,7 @@
                     <p class="display-4">{{$p->name}}</p>
                     <p class="display-4">Pozostało: {{$p->amount}}</p>
                     <p class="display-4">{{$p->price}} PLN</p>
+                    <meta name="csrf-token" content="{{ csrf_token() }}">
                     <button id="addToBasket" onclick="addToBasket({{$p->id}})" class="btn-lg btn btn-danger mt-2">Dodaj do koszyka</button><br>
                     <button class="btn-lg btn btn-info mt-2">Przejdź do płatności</button>
                 </div>
@@ -106,21 +107,21 @@
 
         function addToBasket(a) {
 
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
             $.ajax({
                 url: "{{route('addToBasket')}}",
                 method: "POST",
                 datatype: "json",
-                data: a,
+                data: "val=" + a,
                 success: function () {
                     alert(1);
                 }
             });
-
-            {{--$.post('{{route('addToBasket')}}',{val: a},function (response) {--}}
-                {{--if(response){--}}
-
-                {{--}--}}
-            {{--})--}}
         }
 
     </script>
