@@ -9,8 +9,6 @@ class Basket extends Controller
 {
     public function show(){
         $id = Auth::id();
-        $basket = \App\Basket::find($id)->all();
-        print_r($basket);
-        return view('basket.show')->with('basket',$basket);
+        return view('basket.show',['basket' => \App\Basket::find($id)->all()]);
     }
 }
