@@ -99,9 +99,7 @@
         @endforeach
     </div>
 
-    <div class="footer mt-3 bg-dark p-3">
 
-    </div>
 
     <script>
 
@@ -119,7 +117,7 @@
                 datatype: "json",
                 data: "val=" + a,
                 success: function () {
-                    alert(1);
+                    $('#basketIcon').css('color','red')
                 }
             });
         }

@@ -18,6 +18,8 @@ class Main extends Controller
     public function index(){
         $categories = Category::all();
 
+        $user = User::find(Auth::id());
+
         $products = Product::all();
         return view('main.base',compact('products','categories'));
     }
