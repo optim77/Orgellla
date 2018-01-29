@@ -9,6 +9,9 @@
                 <div  id="bougthClick" class="btn btn-primary col-sm-3 text-center table-bordered"><a class="text-white" href="{{route('boughtProfile')}}">Kupione</a></div>
                 <div id="dataClick" class="btn btn-primary col-sm-3 text-center table-bordered"><a class="text-white" href="{{route('editProfile')}}">Dane</a></div>
                 <div class=" btn btn-primary col-sm-3 text-center table-bordered"><a class="text-white" href="{{route('create')}}" >Wystaw przedmiot</a></div>
+                @if(Auth::user()->admin)
+                    <div class=" btn btn-danger col-sm-3 text-center table-bordered"><a class="text-white" href="{{route('admin.index')}}" >Panel administaracyjny</a></div>
+                @endif
             </div>
         </div>
     </div>

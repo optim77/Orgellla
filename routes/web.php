@@ -48,6 +48,10 @@ Route::group(['middleware' => ['web']], function(){
 
     Route::get('categories','Categories@whole')->name('showCategories');
 
+
+    Route::resource('admin','Admin');
+
+
     Route::match(['post','get'],'/addToBasket','Ajax@addToBasket')->name('addToBasket');
 });
 

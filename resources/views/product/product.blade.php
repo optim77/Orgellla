@@ -18,6 +18,12 @@
                     </div>
                 </div>
                 <div class="col-sm-6 text-center">
+                    @if(Auth::user()->admin)
+                        <p class="text-left">
+                            <a class="btn btn-danger" href="{{route('admin.edit',$p->slug)}}">Edit</a>
+                            <a class="btn btn-danger" href="{{route('admin.edit',$p->slug)}}">Delete</a>
+                        </p>
+                        @endif
                     <p class="display-4">{{$p->name}}</p>
                     <p class="display-4">Pozostało: {{$p->amount}}</p>
                     <p class="display-4">{{$p->price}} PLN</p>
