@@ -3,7 +3,7 @@
 <div class="container">
 
     <?php $wholeCost = 0 ?>
-    <?php $amount = 0 ?>
+    <?php $amount = '' ?>
     @foreach($basket as $b)
 
         @if($b->complete == 1)

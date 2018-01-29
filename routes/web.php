@@ -44,6 +44,9 @@ Route::group(['middleware' => ['web']], function(){
 
     Route::get('/deleteBasket/{id}','Basket@delete')->name('deleteFromBasket');
 
+    Route::get('/category/{slug}','Categories@show')->name('showCategory');
+
+    Route::get('categories','Categories@whole')->name('showCategories');
 
     Route::match(['post','get'],'/addToBasket','Ajax@addToBasket')->name('addToBasket');
 });

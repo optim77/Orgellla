@@ -27,15 +27,4 @@ class Ajax extends Controller
         return new JsonResponse($response);
     }
 
-    public function deleteFromBasket(Request $request){
-        $user = Auth::id();
-        $id = $_POST['val'];
-        $item = Basket::find($id);
-        $item->complete = 0;
-        $item->save();
-        $response = array('code' => 100, 'success' => true);
-        return new JsonResponse($response);
-
-    }
-
 }

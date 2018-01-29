@@ -5,7 +5,7 @@
         @foreach($product as $p)
             <div class="row">
                 <div class="col-sm-12 p-3">
-                    <a class="text-dark" href="">{{$p->category->name}}</a>
+                    <a class="text-dark" href="{{route('showCategory',$p->category->slug)}}">{{$p->category->name}}</a>
                 </div>
                 <div class="col-sm-6">
                     <img data-toggle="modal" data-target=".bd-example-modal-lg" class="w-100 img-responsive" src="../upload/photos/{{$p->photo1}}">
@@ -22,8 +22,15 @@
                     <p class="display-4">Pozostało: {{$p->amount}}</p>
                     <p class="display-4">{{$p->price}} PLN</p>
                     <meta name="csrf-token" content="{{ csrf_token() }}">
-                    <button id="addToBasket" onclick="addToBasket({{$p->id}})" class="btn-lg btn btn-danger mt-2">Dodaj do koszyka</button><br>
-                    <button class="btn-lg btn btn-info mt-2">Przejdź do płatności</button>
+                    @if(Auth::id())
+                        <button id="addToBasket" onclick="addToBasket({{$p->id}})" class="btn-lg btn btn-danger mt-2">Dodaj do koszyka</button><br>
+                        <button class="btn-lg btn btn-info mt-2">Przejdź do płatności</button>
+
+                        @else
+                        <a href="{{route('login')}}" id="addToBasket"  class="btn-lg btn btn-danger mt-2">Dodaj do koszyka</a><br>
+                        <a href="{{route('login')}}" class="btn-lg btn btn-info mt-2">Przejdź do płatności</a>
+                        @endif
+
                 </div>
 
                 <div class="col-sm-12 mt-5">

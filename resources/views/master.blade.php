@@ -50,9 +50,9 @@
 @yield('promo')
 
 
-<div class="footer mt-3 bg-dark p-3">
+{{--<div class="footer mt-3 bg-dark p-3">--}}
 
-</div>
+{{--</div>--}}
 
 
 </body>
