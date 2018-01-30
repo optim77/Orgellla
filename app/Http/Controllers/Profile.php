@@ -58,7 +58,9 @@ class Profile extends Controller
         $product = new Product($request->all());
         $product->slug = $plain;
         $product->user_id = $id;
-        print_r($request->file('photo1')->getClientSize());
+        ///print_r($request->file('photo1')->getClientSize());
+        $product->start = new \DateTime();
+
 
         if(Input::hasFile('photo1') && $request->file('photo1')->getClientSize() < 500000){
 
@@ -67,6 +69,39 @@ class Profile extends Controller
             $product->photo1 = $name.'.'.$guessExtension;
             $file = $request->file('photo1')->move('upload/photos', $name.'.'.$guessExtension);
         }
+
+        if(Input::hasFile('photo2') && $request->file('photo2')->getClientSize() < 500000){
+
+            $name = uniqid(null,true);
+            $guessExtension = $request->file('photo2')->guessExtension();
+            $product->photo3 = $name.'.'.$guessExtension;
+            $file = $request->file('photo2')->move('upload/photos', $name.'.'.$guessExtension);
+        }
+
+        if(Input::hasFile('photo3') && $request->file('photo3')->getClientSize() < 500000){
+
+            $name = uniqid(null,true);
+            $guessExtension = $request->file('photo3')->guessExtension();
+            $product->photo4 = $name.'.'.$guessExtension;
+            $file = $request->file('photo3')->move('upload/photos', $name.'.'.$guessExtension);
+        }
+
+        if(Input::hasFile('photo5') && $request->file('photo5')->getClientSize() < 500000){
+
+            $name = uniqid(null,true);
+            $guessExtension = $request->file('photo5')->guessExtension();
+            $product->photo5 = $name.'.'.$guessExtension;
+            $file = $request->file('photo5')->move('upload/photos', $name.'.'.$guessExtension);
+        }
+
+        if(Input::hasFile('photo6') && $request->file('photo6')->getClientSize() < 500000){
+
+            $name = uniqid(null,true);
+            $guessExtension = $request->file('photo6')->guessExtension();
+            $product->photo6 = $name.'.'.$guessExtension;
+            $file = $request->file('photo6')->move('upload/photos', $name.'.'.$guessExtension);
+        }
+
         $product->save();
         return redirect('profile');
     }

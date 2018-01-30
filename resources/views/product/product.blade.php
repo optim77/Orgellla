@@ -18,10 +18,10 @@
                     </div>
                 </div>
                 <div class="col-sm-6 text-center">
-                    @if(Auth::user()->admin)
+                    @if(Auth::user() !== null && Auth::user()->admin)
                         <p class="text-left">
-                            <a class="btn btn-danger" href="{{route('admin.edit',$p->slug)}}">Edit</a>
-                            <a class="btn btn-danger" href="{{route('admin.edit',$p->slug)}}">Delete</a>
+                            <a class="btn btn-danger" href="{{route('adminEditProduct',$p->slug)}}">Edit</a>
+                            <button id="delete" class="btn btn-danger" href="{{route('adminDeleteProduct',$p->slug)}}">Delete</button>
                         </p>
                         @endif
                     <p class="display-4">{{$p->name}}</p>
@@ -116,6 +116,22 @@
 
     <script>
 
+        function oknoConfirm() {
+            if (confirm('Czy jesteś pewien, że chcesz kontynuować?')) {
+                top.location.href = '{{route('adminDeleteProduct',$p->slug)}}'
+            } else {
+                return false;
+            }
+        }
+
+        document.querySelector('#delete').addEventListener('click', function() {
+            oknoConfirm()
+        });
+
+//        $("#delete").click(function () {
+//            oknoConfirm();
+//        });
+
         function addToBasket(a) {
 
             $.ajaxSetup({
@@ -123,6 +139,8 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+
+
 
             $.ajax({
                 url: "{{route('addToBasket')}}",

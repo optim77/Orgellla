@@ -48,8 +48,15 @@ Route::group(['middleware' => ['web']], function(){
 
     Route::get('categories','Categories@whole')->name('showCategories');
 
+    Route::resource('admin','admin');
 
-    Route::resource('admin','Admin');
+    Route::get('/admin/{id}/edit','Admin@edit')->name('adminEditProduct');
+
+    Route::post('/admin/update/{id}','Admin@updateProduct')->name('adminUpdateProduct');
+
+    Route::get('/admin/delete/{photo}/{slug}/{name}','Admin@deletePhoto')->name('adminDeletePhoto');
+
+    Route::get('/admin/delete/{id}','Admin@destroy')->name('adminDeleteProduct');
 
 
     Route::match(['post','get'],'/addToBasket','Ajax@addToBasket')->name('addToBasket');
