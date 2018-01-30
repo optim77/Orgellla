@@ -27,8 +27,6 @@
             {!! Form::label('price','Price:') !!}
             {!! Form::text('price',$p->price,['class' => 'form-control w-25','required']) !!}
 
-            {!! Form::label('amount','Amount:') !!}
-            {!! Form::text('amount',$p->amount,['class' => 'form-control w-25','required']) !!}
         </div>
 
         <div class="">
@@ -113,8 +111,6 @@
         {!! Form::label('price','Price:') !!}
         {!! Form::text('price',null,['class' => 'form-control w-25','required']) !!}
 
-        {!! Form::label('amount','Amount:') !!}
-        {!! Form::text('amount',null,['class' => 'form-control w-25','required']) !!}
     </div>
 
     <div class="">

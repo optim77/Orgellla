@@ -25,16 +25,22 @@
                         </p>
                         @endif
                     <p class="display-4">{{$p->name}}</p>
-                    <p class="display-4">Pozostało: {{$p->amount}}</p>
                     <p class="display-4">{{$p->price}} PLN</p>
                     <meta name="csrf-token" content="{{ csrf_token() }}">
                     @if(Auth::id())
-                        <button id="addToBasket" onclick="addToBasket({{$p->id}})" class="btn-lg btn btn-danger mt-2">Dodaj do koszyka</button><br>
-                        <button class="btn-lg btn btn-info mt-2">Przejdź do płatności</button>
+                        <button id="addToBasket" onclick="addToBasket({{$p->id}})" class="btn-lg btn btn-danger mt-2">Tel. {{$p->user->phone}}</button><br>
+
+                            {{--<form class="form-group ml-5 mr-5 mt-2 mb-2" action="mailto:{{$p->user->email}}" method="GET">--}}
+                                {{--<input class="form-control" name="subject" type="text" />--}}
+                                {{--<textarea class="form-control mt-2" name="body"></textarea>--}}
+                                {{--<input type="submit" class="btn btn-danger mt-2" value="Send" />--}}
+                            {{--</form>--}}
+
+                            <a href="{{route('conversation',[$p->user->id,$p->slug])}}" class="btn-lg btn btn-info mt-2">Napisz wiadomość</a>
 
                         @else
-                        <a href="{{route('login')}}" id="addToBasket"  class="btn-lg btn btn-danger mt-2">Dodaj do koszyka</a><br>
-                        <a href="{{route('login')}}" class="btn-lg btn btn-info mt-2">Przejdź do płatności</a>
+                        <a href="{{route('login')}}" id="addToBasket"  class="btn-lg btn btn-danger mt-2">Tel. {{$p->user->phone}}</a><br>
+                        <a href="{{route('login')}}" class="btn-lg btn btn-info mt-2">Napisz wiadomość</a>
                         @endif
 
                 </div>
@@ -127,31 +133,6 @@
         document.querySelector('#delete').addEventListener('click', function() {
             oknoConfirm()
         });
-
-//        $("#delete").click(function () {
-//            oknoConfirm();
-//        });
-
-        function addToBasket(a) {
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-
-
-            $.ajax({
-                url: "{{route('addToBasket')}}",
-                method: "POST",
-                datatype: "json",
-                data: "val=" + a,
-                success: function () {
-                    $('#basketIcon').css('color','red')
-                }
-            });
-        }
 
     </script>
 

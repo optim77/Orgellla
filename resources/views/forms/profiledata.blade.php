@@ -34,7 +34,7 @@
             <label for="street" class="col-md-4 control-label">Street</label>
 
             <div class="col-md-12">
-                <input id="street" type="text" class="form-control" name="street" value="{{ $data['street'] }}" required autofocus>
+                <input id="street" type="text" class="form-control" name="street" value="{{ $data['street'] }}"  autofocus>
 
                 @if ($errors->has('street'))
                     <span class="help-block">
@@ -48,7 +48,7 @@
             <label for="city" class="col-md-4 control-label">City</label>
 
             <div class="col-md-12">
-                <input id="city" type="text" class="form-control" name="city" value="{{ $data['city'] }}" required autofocus>
+                <input id="city" type="text" class="form-control" name="city" value="{{ $data['city'] }}"  autofocus>
 
                 @if ($errors->has('city'))
                     <span class="help-block">
@@ -62,7 +62,7 @@
             <label for="number" class="col-md-4 control-label">Number</label>
 
             <div class="col-md-12">
-                <input id="number" type="text" class="form-control" name="number" value="{{ $data['number'] }}" required autofocus>
+                <input id="number" type="text" class="form-control" name="number" value="{{ $data['number'] }}"  autofocus>
 
                 @if ($errors->has('number'))
                     <span class="help-block">
@@ -76,7 +76,7 @@
             <label for="zip" class="col-md-4 control-label">Zip-Code</label>
 
             <div class="col-md-12">
-                <input id="zip" type="text" class="form-control" name="zip" value="{{ $data['zip'] }}" required autofocus>
+                <input id="zip" type="text" class="form-control" name="zip" value="{{ $data['zip'] }}"  autofocus>
 
                 @if ($errors->has('zip'))
                     <span class="help-block">

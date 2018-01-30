@@ -25,6 +25,12 @@ class Profile extends Controller
         return view('profile.data')->with('data',$data);
     }
 
+    public function onSell(){
+        $id = Auth::id();
+        $products = Product::where('user_id',$id)->get()->all();
+        return view('profile.onSell',['products' => $products]);
+    }
+
     public function edit(Request $request){
         $id = Auth::id();
         $data = User::find($id);
@@ -58,8 +64,6 @@ class Profile extends Controller
         $product = new Product($request->all());
         $product->slug = $plain;
         $product->user_id = $id;
-        ///print_r($request->file('photo1')->getClientSize());
-        $product->start = new \DateTime();
 
 
         if(Input::hasFile('photo1') && $request->file('photo1')->getClientSize() < 500000){
@@ -104,6 +108,15 @@ class Profile extends Controller
 
         $product->save();
         return redirect('profile');
+    }
+
+
+    public function conversation($userId,$slug){
+        $Suser = User::find($userId);
+        $Uuser = Auth::id();
+
+        return view('profile.conversation',['user' => $Suser,'product' => Product::where('slug',$slug)->get()]);
+
     }
 
 }

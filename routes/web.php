@@ -24,6 +24,8 @@ Route::group(['middleware' => ['web']], function(){
     /** Show bought card */
     Route::get('/profile/kupione','Profile@bought')->name('boughtProfile');
 
+    Route::get('/profile/wystawione','Profile@onSell')->name('onSell');
+
     /** Show create product form */
     Route::get('/create','Profile@create')->name('create');
 
@@ -60,5 +62,8 @@ Route::group(['middleware' => ['web']], function(){
 
 
     Route::match(['post','get'],'/addToBasket','Ajax@addToBasket')->name('addToBasket');
+
+    Route::get('/conversation/{id}/{slug}','Profile@conversation')->name('conversation');
+
 });
 

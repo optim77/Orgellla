@@ -25,8 +25,6 @@ class CreateProductsTable extends Migration
             $table->string('photo4')->nullable();
             $table->string('photo5')->nullable();
             $table->string('photo6')->nullable();
-            $table->string('amount');
-            $table->dateTime('start');
             $table->double('price',8,2);
             $table->integer('user_id')->unsigned()->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('categories');
