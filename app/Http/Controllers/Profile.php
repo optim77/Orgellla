@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Bought;
 use App\Category;
+use App\Conv;
 use App\Product;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 
 class Profile extends Controller
 {
@@ -111,11 +113,51 @@ class Profile extends Controller
     }
 
 
-    public function conversation($userId,$slug){
+    public function conversation($userId,$slug,$productId){
         $Suser = User::find($userId);
         $Uuser = Auth::id();
+        $messages = Conv::where(['f_user' => $Uuser,'s_user' => $Suser->id],'or',['f_user' => $Suser->id,'s_user' => $Uuser])->get();
+        $content = null;
+        foreach ($messages as $m){
+           $f = 'conv/'.$m->file;
+           $handle = fopen($f,'r');
+           $content = fread($handle,filesize($f));
 
-        return view('profile.conversation',['user' => $Suser,'product' => Product::where('slug',$slug)->get()]);
+           fclose($handle);
+//            $file = fopen('conv/'.$m->file,'r') or die('Unable to open file!');
+//            echo fread($file,filesize('conv/'.$m->file));
+        }
+
+        return view('profile.conversation',['user' => $Suser,'product' => Product::where('slug',$slug)->get(),'conv' => $content  ]);
+
+    }
+
+    public function sendMessage(Request $request){
+        $userId = Auth::id();
+        $user = $request->user;
+        $message = "<div class='col-sm-12 bg-primary mt-1 w-25 '>".$request->message."</div>";
+        $product = $request->productId;
+
+        $is = Conv::where(['product_id' => $product,'f_user' => $user,'s_user' => $userId],'or',['product_id' => $product,'f_user' => $userId,'s_user' => $user])->get();
+        $file = '';
+        foreach ($is as $i){
+            if ($i->file !== null){
+                $fp = fopen('conv/'.$i->file,'a+');
+                fwrite($fp,$message);
+                fclose($fp);
+            }
+            else{
+                $nameMessage = uniqid(null,true).'.txt';
+                $conv = Conv::insert(['f_user' => $userId , 's_user' => $user,'file' => $nameMessage,'product_id' => $product,'created_at' => new \DateTime()]);
+
+                $fp = fopen('conv/'.$nameMessage,'w');
+                fwrite($fp,$message);
+                fclose($fp);
+            }
+        }
+
+
+        return Redirect::back();
 
     }
 

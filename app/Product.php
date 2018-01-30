@@ -21,4 +21,8 @@ class Product extends Model
     public function user(){
         return $this->belongsTo('App\User');
     }
+
+    public function conv(){
+        return $this->belongsTo('App\Conv');
+    }
 }

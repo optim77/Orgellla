@@ -63,7 +63,9 @@ Route::group(['middleware' => ['web']], function(){
 
     Route::match(['post','get'],'/addToBasket','Ajax@addToBasket')->name('addToBasket');
 
-    Route::get('/conversation/{id}/{slug}','Profile@conversation')->name('conversation');
+    Route::get('/conversation/{id}/{slug}/{productId}','Profile@conversation')->name('conversation');
+
+    Route::post('/wiadomosc','Profile@sendMessage')->name('messages');
 
 });
 
