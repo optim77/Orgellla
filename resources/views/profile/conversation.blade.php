@@ -35,7 +35,7 @@
                         {{csrf_field()}}
                         <input type="hidden" name="user" value="{{$user->id}}">
                         <input type="hidden" name="productId" value="{{$p->id}}">
-                        <textarea name="message"  class="form-control mt-2"  rows="2"></textarea>
+                        <textarea name="message" required  class="form-control mt-2"  rows="2"></textarea>
                         <div class="col-sm-12 text-right mt-2">
                             <input type="submit" class="btn btn-info">
                         </div>

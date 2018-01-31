@@ -7,6 +7,7 @@ use App\Category;
 use App\Conv;
 use App\Product;
 use App\User;
+use Faker\Provider\DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -138,23 +139,36 @@ class Profile extends Controller
         $message = "<div class='col-sm-12 bg-primary mt-1 w-25 '>".$request->message."</div>";
         $product = $request->productId;
 
-        $is = Conv::where(['product_id' => $product,'f_user' => $user,'s_user' => $userId],'or',['product_id' => $product,'f_user' => $userId,'s_user' => $user])->get();
+        $is = Conv::where(['product_id' => $product,'f_user' => $user,'s_user' => $userId])->orWhere(['product_id' => $product,'f_user' => $userId,'s_user' => $user])->get();
         $file = '';
-        foreach ($is as $i){
-            if ($i->file !== null){
-                $fp = fopen('conv/'.$i->file,'a+');
-                fwrite($fp,$message);
-                fclose($fp);
-            }
-            else{
-                $nameMessage = uniqid(null,true).'.txt';
-                $conv = Conv::insert(['f_user' => $userId , 's_user' => $user,'file' => $nameMessage,'product_id' => $product,'created_at' => new \DateTime()]);
+//        print_r(['product_id' => $product,'f_user' => $user,'s_user' => $userId]);
+//        print_r($is->all());
+//        if ($is->all() !== array()){
+//
+//            echo 1;
+//        }
+//        exit();
+        if ($is->all() !== array()){
+            foreach ($is as $i){
+                if ($i->file !== null){
+                    $fp = fopen('conv/'.$i->file,'a+');
+                    fwrite($fp,$message);
+                    fclose($fp);
+                    Conv::where('updated_at',new \DateTime());
+                }
 
-                $fp = fopen('conv/'.$nameMessage,'w');
-                fwrite($fp,$message);
-                fclose($fp);
             }
+        }else{
+            $nameMessage = uniqid(null,true).'.txt';
+            $conv = Conv::insert(['f_user' => $userId , 's_user' => $user,'file' => $nameMessage,'product_id' => $product,'created_at' => new \DateTime()]);
+
+            $fp = fopen('conv/'.$nameMessage,'a+');
+            fwrite($fp,$message);
+            fclose($fp);
         }
+
+
+
 
 
         return Redirect::back();
