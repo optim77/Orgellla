@@ -117,7 +117,7 @@ class Profile extends Controller
     public function conversation($userId,$slug,$productId){
         $Suser = User::find($userId);
         $Uuser = Auth::id();
-        $messages = Conv::where(['f_user' => $Uuser,'s_user' => $Suser->id],'or',['f_user' => $Suser->id,'s_user' => $Uuser])->get();
+        $messages = Conv::where(['f_user' => $Uuser,'s_user' => $Suser->id])->orWhere(['f_user' => $Suser->id,'s_user' => $Uuser])->get();
         $content = null;
         foreach ($messages as $m){
            $f = 'conv/'.$m->file;
@@ -141,13 +141,7 @@ class Profile extends Controller
 
         $is = Conv::where(['product_id' => $product,'f_user' => $user,'s_user' => $userId])->orWhere(['product_id' => $product,'f_user' => $userId,'s_user' => $user])->get();
         $file = '';
-//        print_r(['product_id' => $product,'f_user' => $user,'s_user' => $userId]);
-//        print_r($is->all());
-//        if ($is->all() !== array()){
-//
-//            echo 1;
-//        }
-//        exit();
+
         if ($is->all() !== array()){
             foreach ($is as $i){
                 if ($i->file !== null){
@@ -166,12 +160,33 @@ class Profile extends Controller
             fwrite($fp,$message);
             fclose($fp);
         }
-
-
-
-
-
         return Redirect::back();
+    }
+
+
+    public function showConv(){
+        $id = Auth::id();
+        $convs = Conv::where('f_user',$id)->orWhere('s_user',$id)->get()->all();
+
+        return view('profile.convs',['convs' => $convs]);
+    }
+
+    public function loadConv($id){
+
+        $conv = Conv::where('file',$id)->get();
+        foreach ($conv as $m){
+            if($m->f_user == Auth::id()){
+                $user = $m->s_user;
+            }else{
+                $user = $m->f_user;
+            }
+            $userS = User::where('id',$user)->get();
+            $f = 'conv/'.$m->file;
+            $handle = fopen($f,'r');
+            $content = fread($handle,filesize($f));
+            fclose($handle);
+        }
+        return view('profile.cnv',['conv' => $content,'product' => $conv,'user' => $userS]);
 
     }
 

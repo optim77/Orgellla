@@ -22,7 +22,7 @@ class Product extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function conv(){
-        return $this->belongsTo('App\Conv');
+    public function convs(){
+        return $this->hasMany('App\Conv');
     }
 }

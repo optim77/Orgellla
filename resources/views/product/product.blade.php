@@ -30,17 +30,15 @@
                     @if(Auth::id())
                         <button id="addToBasket"  class="btn-lg btn btn-danger mt-2">Tel. {{$p->user->phone}}</button><br>
 
-                            {{--<form class="form-group ml-5 mr-5 mt-2 mb-2" action="mailto:{{$p->user->email}}" method="GET">--}}
-                                {{--<input class="form-control" name="subject" type="text" />--}}
-                                {{--<textarea class="form-control mt-2" name="body"></textarea>--}}
-                                {{--<input type="submit" class="btn btn-danger mt-2" value="Send" />--}}
-                            {{--</form>--}}
-
-                            <a href="{{route('conversation',[$p->user->id,$p->slug,$p->id])}}" class="btn-lg btn btn-info mt-2">Napisz wiadomość</a>
+                            @if($p->user->id != \Illuminate\Support\Facades\Auth::id())
+                                <a href="{{route('conversation',[$p->user->id,$p->slug,$p->id])}}" class="btn-lg btn btn-info mt-2">Napisz wiadomość</a>
+                                @else
+                                <a href="{{route('conversation',[$p->user->id,$p->slug,$p->id])}}" class="btn-lg btn btn-info mt-2">Edytuj</a>
+                            @endif
 
                         @else
                         <a href="{{route('login')}}" id="addToBasket"  class="btn-lg btn btn-danger mt-2">Tel. {{$p->user->phone}}</a><br>
-                        <a href="{{route('login')}}" class="btn-lg btn btn-info mt-2">Napisz wiadomość</a>
+                            <a href="{{route('login')}}" class="btn-lg btn btn-info mt-2">Napisz wiadomość</a>
                         @endif
 
                 </div>

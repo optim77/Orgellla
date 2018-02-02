@@ -67,5 +67,9 @@ Route::group(['middleware' => ['web']], function(){
 
     Route::post('/wiadomosc','Profile@sendMessage')->name('messages');
 
+    Route::get('/konwesacje','Profile@showConv')->name('showConv');
+
+    Route::get('/konwersacje/{id}','Profile@loadConv')->name('loadConv');
+
 });
 
