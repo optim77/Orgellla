@@ -54,6 +54,73 @@ class Profile extends Controller
         return view('profile.bought')->with('data',$data);
     }
 
+    public function editProduct($id){
+
+        $product = Product::find($id);
+        $categories = Category::pluck('name','id');
+        return view('profile.editProduct',['product' => $product,'categories' => $categories]);
+    }
+
+    public function editProductAction(Request $request){
+
+        $product = Product::find($request->product);
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->price = $request->price;
+
+        print_r($request->all());
+        if(Input::hasFile('photo1') && $request->file('photo1')->getClientSize() < 500000){
+            $name = uniqid(null,true);
+            $guessExtension = $request->file('photo1')->guessExtension();
+            $product->photo1 = $name.'.'.$guessExtension;
+            $file = $request->file('photo1')->move('upload/photos', $name.'.'.$guessExtension);
+        }
+
+        if(Input::hasFile('photo2') && $request->file('photo2')->getClientSize() < 500000){
+
+            $name = uniqid(null,true);
+            $guessExtension = $request->file('photo2')->guessExtension();
+            $product->photo3 = $name.'.'.$guessExtension;
+            $file = $request->file('photo2')->move('upload/photos', $name.'.'.$guessExtension);
+        }
+
+        if(Input::hasFile('photo3') && $request->file('photo3')->getClientSize() < 500000){
+
+            $name = uniqid(null,true);
+            $guessExtension = $request->file('photo3')->guessExtension();
+            $product->photo4 = $name.'.'.$guessExtension;
+            $file = $request->file('photo3')->move('upload/photos', $name.'.'.$guessExtension);
+        }
+
+        if(Input::hasFile('photo5') && $request->file('photo5')->getClientSize() < 500000){
+
+            $name = uniqid(null,true);
+            $guessExtension = $request->file('photo5')->guessExtension();
+            $product->photo5 = $name.'.'.$guessExtension;
+            $file = $request->file('photo5')->move('upload/photos', $name.'.'.$guessExtension);
+        }
+
+        if(Input::hasFile('photo6') && $request->file('photo6')->getClientSize() < 500000){
+
+            $name = uniqid(null,true);
+            $guessExtension = $request->file('photo6')->guessExtension();
+            $product->photo6 = $name.'.'.$guessExtension;
+            $file = $request->file('photo6')->move('upload/photos', $name.'.'.$guessExtension);
+        }
+
+
+        $product->save();
+
+        return back();
+
+
+    }
+
+    public function destroyProduct($id){
+        Product::destroy($id);
+        return back();
+    }
+
     public function create(){
         $categories = Category::pluck('name','id');
         return view('profile.create')->with('categories',$categories);

@@ -101,4 +101,6 @@ class Admin extends Controller
         return redirect(route('mainIndex'));
 
     }
+
+
 }

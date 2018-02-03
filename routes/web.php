@@ -71,5 +71,18 @@ Route::group(['middleware' => ['web']], function(){
 
     Route::get('/konwersacje/{id}','Profile@loadConv')->name('loadConv');
 
+    Route::get('/admin/categories','AdminPanel@getCategories')->name('categoriesAdmin');
+
+    Route::post('/admin/categories/{id}/edit')->name('editCategory');
+
+    Route::post('/admin/categories/{id}/destroy')->name('destroyCategory');
+
+    Route::get('/show/{id}/edit','Profile@editProduct')->name('userEditProduct');
+
+    Route::get('/show/{id}/destroy','Profile@destroyProduct')->name('userDestroyProduct');
+
+    Route::post('update','Profile@editProductAction')->name('updateUserProduct');
+
+
 });
 

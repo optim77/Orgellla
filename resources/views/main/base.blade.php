@@ -8,8 +8,8 @@
                     <?php $count++ ?>
                 @if($count <= 6)
                 <div class="col-md-2 col-sm-2 text-center bg-warning p-4">
-                    <a class="text-dark" href="{{ route('showCategory',$category['slug'])  }}">
-                        <i class="fab fa-android h1"></i><br/>
+                    <a class="text-dark display-4" href="{{ route('showCategory',$category['slug'])  }}">
+
                         {{$category['name']}}
                     </a>
                 </div>

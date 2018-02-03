@@ -19,8 +19,8 @@
                                 <h4 class="media-heading p-2 lead">{{$p->price}} PLN</h4>
                             </div>
                             <div class="col-sm-4 text-right">
-                                <a href="{{route('deleteFromBasket',$p->id)}}" class="btn btn-danger">Edytuj</a>
-                                <a href="{{route('deleteFromBasket',$p->id)}}" class="btn btn-danger">Zakończ</a>
+                                <a href="{{route('userEditProduct',$p->id)}}" class="btn btn-danger">Edytuj</a>
+                                <a href="{{route('userDestroyProduct',$p->id)}}" class="btn btn-danger">Zakończ</a>
                             </div>
                         </div>
                         <p></p>

@@ -3,12 +3,13 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-sm-5 bg-danger text-center m-1">
-                <p>TAB</p>
-            </div>
-            <div class="col-sm-5 bg-danger text-center m-1">
-                <p>TAB</p>
-            </div>
+            <a class="col-sm-12 bg-danger text-center m-1 p-3 text-dark text-center" href="{{route('categoriesAdmin')}}">
+                <div class="">
+                    <p class="display-4">Categories</p>
+                </div>
+            </a>
+
+
         </div>
     </div>
 
