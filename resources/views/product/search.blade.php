@@ -6,7 +6,7 @@
 
             <div class="row p-3">
                 <div class="col-sm-3">
-                    <img class="w-100" src="../upload/photos/{{$p->photo1}}">
+                    <img class="w-100" src="upload/photos/{{$p->photo1}}">
 
                 </div>
                 <div class="col-sm-9">
@@ -22,8 +22,8 @@
 
         @endforeach
 
-            {{ $products->links('vendor/pagination.bootstrap-4') }}
+        {{ $products->links('vendor/pagination.bootstrap-4') }}
     </div>
 
 
-    @stop
+@stop

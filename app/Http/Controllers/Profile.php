@@ -203,11 +203,17 @@ class Profile extends Controller
     public function sendMessage(Request $request){
         $userId = Auth::id();
         $user = $request->user;
-        $message = "<div class='col-sm-12 bg-primary mt-1 w-25 '>".$request->message."</div>";
+        $space = '0%';
+        if (Auth::id() != $user){
+            $space = '75%';
+        }
+        $message = "<div class='col-sm-12 bg-primary mt-1 w-25 ' style='margin-left:".$space."'>".$request->message."</div>";
         $product = $request->productId;
 
-        $is = Conv::where(['product_id' => $product,'f_user' => $user,'s_user' => $userId])->orWhere(['product_id' => $product,'f_user' => $userId,'s_user' => $user])->get();
+
+        $is = DB::table('convs')->where(['product_id' => $product,'f_user' => $user,'s_user' => $userId])->orWhere(['product_id' => $product,'f_user' => $userId,'s_user' => $user])->get();
         $file = '';
+
 
         if ($is->all() !== array()){
             foreach ($is as $i){
@@ -215,7 +221,7 @@ class Profile extends Controller
                     $fp = fopen('conv/'.$i->file,'a+');
                     fwrite($fp,$message);
                     fclose($fp);
-                    Conv::where('updated_at',new \DateTime());
+
                 }
 
             }
@@ -255,6 +261,12 @@ class Profile extends Controller
         }
         return view('profile.cnv',['conv' => $content,'product' => $conv,'user' => $userS]);
 
+    }
+
+    public function logout(Request $request){
+        session_destroy();
+
+        return \redirect(route('mainIndex'));
     }
 
 }

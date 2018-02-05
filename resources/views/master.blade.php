@@ -13,6 +13,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbQzabutLSxb1lAsIg5tKt7JMSf6X6Ago&callback=initMap">
+    </script>
+
 
 </head>
 <body>
@@ -24,8 +28,8 @@
         </div>
 
         <div class="col-md-4">
-            <form class="form-inline mt-4">
-                <input class="form-control mr-sm-2 w-75 " type="text" placeholder="Szukaj">
+            <form action="{{route('search')}}" method="get" class="form-inline mt-4">
+                <input class="form-control mr-sm-2 w-75" name="phrase" type="text" placeholder="Szukaj">
                 <button class="btn btn-outline-success my-2  my-sm-0" type="submit">Search</button>
             </form>
         </div>

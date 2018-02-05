@@ -83,6 +83,11 @@ Route::group(['middleware' => ['web']], function(){
 
     Route::post('update','Profile@editProductAction')->name('updateUserProduct');
 
+    Route::get('/logout','Profile@logout')->name('logout');
+
+    Route::get('/search','Product@search')->name('search');
+
+    Route::get('/profile/{id}','Profile@')
 
 });
 

@@ -17,7 +17,7 @@ class Categories extends Controller
         }
 
 
-        $products = \App\Product::where('category_id',$id)->get()->all();
+        $products = \App\Product::where('category_id',$id)->paginate(15);
 
         return view('categories.category',['products' => $products]);
     }
