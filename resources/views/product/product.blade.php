@@ -40,6 +40,9 @@
                         <a href="{{route('login')}}" id="addToBasket"  class="btn-lg btn btn-danger mt-2">Tel. {{$p->user->phone}}</a><br>
                             <a href="{{route('login')}}" class="btn-lg btn btn-info mt-2">Napisz wiadomość</a>
                         @endif
+                        <div class="col-sm-12">
+                            <a class="text-muted" href="{{route('getProfile',$p->user->id)}}">{{$p->user->name}} {{$p->user->surname}}</a>
+                        </div>
 
                 </div>
 

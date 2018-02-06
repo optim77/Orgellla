@@ -19,7 +19,7 @@
                     <p>
                         @foreach($user as $u)
                             <?php $id = $u->id; ?>
-                            {{$u->name}} {{$u->surname}}  Tel: {{isset($u->phone) ? $u->phone : null}}
+                            <a href="{{route('getProfile',$u->id)}}">{{$u->name}} {{$u->surname}}</a>   Tel: {{isset($u->phone) ? $u->phone : null}}
                         @endforeach
                     </p>
                 </div>

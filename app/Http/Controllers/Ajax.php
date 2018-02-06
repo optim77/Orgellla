@@ -27,4 +27,10 @@ class Ajax extends Controller
         return new JsonResponse($response);
     }
 
+    public function switchLocation(){
+        print_r($_POST);
+        $response = array('code' => 100, 'success' => true);
+        return new JsonResponse($response);
+    }
+
 }

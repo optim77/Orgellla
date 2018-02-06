@@ -25,6 +25,35 @@ class Profile extends Controller
     public function show(){
         $id = Auth::id();
         $data = User::find($id);
+        if($data->lat == null || $data->lng == null){
+            $ipaddress = '';
+            if (isset($_SERVER['HTTP_CLIENT_IP']))
+                $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
+            else if(isset($_SERVER['HTTP_X_FORWARDED_FOR']))
+                $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+            else if(isset($_SERVER['HTTP_X_FORWARDED']))
+                $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
+            else if(isset($_SERVER['HTTP_FORWARDED_FOR']))
+                $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
+            else if(isset($_SERVER['HTTP_FORWARDED']))
+                $ipaddress = $_SERVER['HTTP_FORWARDED'];
+            else if(isset($_SERVER['REMOTE_ADDR']))
+                $ipaddress = $_SERVER['REMOTE_ADDR'];
+            else
+                $ipaddress = 'UNKNOWN';
+
+            $json  = file_get_contents("https://freegeoip.net/json/$ipaddress");
+            $json  =  json_decode($json ,true);
+            $country =  $json['country_name'];
+            $region= $json['region_name'];
+            $city = $json['city'];
+            $lat = $json['latitude'];
+            $lng = $json['longitude'];
+
+            User::where('id',$id)->update(['lat' => $lat,'lng' => $lng]);
+        }
+
+
         return view('profile.data')->with('data',$data);
     }
 
@@ -261,6 +290,12 @@ class Profile extends Controller
         }
         return view('profile.cnv',['conv' => $content,'product' => $conv,'user' => $userS]);
 
+    }
+
+
+    public function getProfile($id){
+        $user = User::find($id);
+        return view('profile.getProfile')->with('user',$user);
     }
 
     public function logout(Request $request){

@@ -17,11 +17,14 @@
             {{$data['city']}}<br>
             {{$data['zip']}}<br>
             {{$data['phone']}}
+            <p class="lead">Pokaż moją loaklizacje innym użytkownikom</p>
+            <input type="checkbox" id="switch" {{$data['blocked'] != null ? 'checked' : '' }} data-toggle="toggle">
         </div>
     </div>
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
+                <p>Przybliżona lokalizacja</p>
                 <div id="map" style="height: 400px;width: 100%;"></div>
             </div>
         </div>
@@ -59,11 +62,19 @@
 
     <script>
 
+        $("#switch").on('change',function () {
+            $.ajax({
+                url: '{{route('switchLocation')}}',
+                type: 'POST',
+                datatype: 'json',
+                data: 'click',
+                success: function () {
+                    $("#switch").after('<div class="alert alert-success>Zmieniono status wyświetlania lokalizacji</div>"');
+                }
+            })
+        })
 
         function initMap() {
-
-
-
             var latX = <?php echo $lat; ?>;
             var lngX = <?php echo $lng ?>;
             var uluru = {lat: latX, lng: lngX};
