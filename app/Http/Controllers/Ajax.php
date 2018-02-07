@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Basket;
+use App\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,8 +28,16 @@ class Ajax extends Controller
         return new JsonResponse($response);
     }
 
-    public function switchLocation(){
-        print_r($_POST);
+    public function switchLocation(Request $request){
+        $id = Auth::id();
+        $user = User::find($id);
+        print_r($user->id);
+        if($user->blocked == null || $user->blocked == 0){
+            User::where('id',$id)->update(['blocked' => 1]);
+
+        }else{
+            User::where('id',$id)->update(['blocked' => 0]);
+        }
         $response = array('code' => 100, 'success' => true);
         return new JsonResponse($response);
     }

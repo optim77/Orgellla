@@ -13,14 +13,22 @@
         <div class="col-sm-12 display-4 text-center ">
         </div>
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <p>Przybliżona lokalizacja</p>
-                <div id="map" style="height: 400px;width: 100%;"></div>
+    @if($user->blocked == 1)
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <p>Przybliżona lokalizacja</p>
+                    <div id="map" style="height: 400px;width: 100%;"></div>
+                </div>
             </div>
         </div>
-    </div>
+
+        @else
+        <div class="col-sm-12 text-center mt-5">
+            <p class="lead">Użytkownik nie zezwolił na wyświetlanie swojej lokalizacji</p>
+        </div>
+        @endif
+
 
 
     <script>

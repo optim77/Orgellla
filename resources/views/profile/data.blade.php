@@ -18,6 +18,7 @@
             {{$data['zip']}}<br>
             {{$data['phone']}}
             <p class="lead">Pokaż moją loaklizacje innym użytkownikom</p>
+            <meta name="csrf-token" content="{{ csrf_token() }}" />
             <input type="checkbox" id="switch" {{$data['blocked'] != null ? 'checked' : '' }} data-toggle="toggle">
         </div>
     </div>
@@ -61,7 +62,11 @@
             ?>
 
     <script>
-
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         $("#switch").on('change',function () {
             $.ajax({
                 url: '{{route('switchLocation')}}',

@@ -87,9 +87,10 @@ Route::group(['middleware' => ['web']], function(){
 
     Route::get('/search','Product@search')->name('search');
 
-    Route::get('/profile/{id}','Profile@getProfile')->name('getProfile');
+    Route::post('/profile/switch','Ajax@switchLocation')->name('switchLocation');
 
-    Route::post('/profile/switch','Profile@switchLocation')->name('switchLocation');
+    Route::get('/profile/{id}/show','Profile@getProfile')->name('getProfile');
+
 
 });
 
