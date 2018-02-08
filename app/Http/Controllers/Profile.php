@@ -299,8 +299,7 @@ class Profile extends Controller
     }
 
     public function logout(Request $request){
-        session_destroy();
-
+        Auth::logout();
         return \redirect(route('mainIndex'));
     }
 

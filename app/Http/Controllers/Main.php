@@ -20,7 +20,7 @@ class Main extends Controller
 
         $user = User::find(Auth::id());
 
-        $products = Product::all();
+        $products = Product::limit(6)->orderBy('id','desc')->get();
         return view('main.base',compact('products','categories'));
     }
 
